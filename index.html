@@ -8,103 +8,15 @@
 </head>
 <body ng-app="edetek">
 
-<div ng-controller="controllers.View">
-    <ul>
-        <li ng-repeat="department in departments" class="well">
-            Department name: {{department.name}}
-            Department description: {{department.description}}
-            <div class="pull-right">
-                <button class="btn btn-primary" ng-click="showDepartmentsEmployee()">Show employees</button>
-                <button class="btn btn-danger" ng-click="deleteDepartment(department.id)">Delete</button>
-            </div>
-
-            <table class="table" ng-if="employees.length > 0">
-                <thead>
-                <tr>
-                    <th>Firstname</th>
-                    <th>Lastname</th>
-                    <th>Phone</th>
-                    <th>Salary</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="employee in employees | filter:filterByDepartmentId(department.id)">
-                    <td>{{employee.firstName}}</td>
-                    <td>{{employee.lastName}}</td>
-                    <td>{{employee.phone}}</td>
-                    <td>{{employee.salary}}</td>
-                    <td><button class="btn btn-danger" ng-click="deleteEmployee(employee.id)">DELETE</button></td>
-                </tr>
-                </tbody>
-            </table>
-
-
-            <form class="form-horizontal"
-                  ng-submit="addEmployee(newEmployee.firstName, newEmployee.lastName, newEmployee.phone, newEmployee.salary, department.id, department.name)">
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="firstName">First name:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Enter first name"
-                               ng-model="newEmployee.firstName" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="lastName">Last name:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Enter last name"
-                               ng-model="newEmployee.lastName">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="phone">Phone:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Enter phone"
-                               ng-model="newEmployee.phone">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-sm-2" for="phone">Salary:</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control" placeholder="Enter salary"
-                               ng-model="newEmployee.salary">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-default">Submit</button>
-                    </div>
-                </div>
-            </form>
-
-            <button class="btn btn-danger">Add Employee</button>
-        </li>
-    </ul>
-
-    <div ng-if="addDepartmentInputs" class="well addepartment">
-        <form class="form-inline" ng-submit="addDepartment(newDepartment.name, newDepartment.description)">
-            <div class="form-group">
-                <label for="name">Department name:</label>
-                <input type="text" class="form-control" ng-model="newDepartment.name">
-            </div>
-            <div class="form-group">
-                <label for="description">Department description:</label>
-                <input type="text" class="form-control" ng-model="newDepartment.description">
-            </div>
-            <button type="submit" class="btn btn-success">Add department</button>
-            <button type="button" class="btn btn-danger" ng-click="showAddDepartmentInputs()">CANCEL</button>
-        </form>
-    </div>
-
-    <div ng-if="!addDepartmentInputs" class="addepartment">
-        <button ng-click="showAddDepartmentInputs()" class="btn btn-success">Add Department</button>
-    </div>
-
+<div class="page-header">
+    <h1>EDETEK Coding Exercise</h1>
 </div>
 
-
+<div ng-controller="controllers.View">
+    <div ui-view></div>
+</div>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.3.1/angular-ui-router.js"></script>
 <script src="public-api.js"></script>
 <script src="api.js"></script>
 <script src="view.js"></script>

@@ -1,10 +1,11 @@
 angular.module('edetek.controllers').controller('controllers.View',
-    ['$scope', '$filter', 'services.Api', function ($scope, $filter, api) {
+    ['$scope', 'services.Api', function ($scope, api) {
         $scope.departments = null
         $scope.newDepartment = {};
         $scope.newEmployee = {};
         $scope.addDepartmentInputs = false;
         $scope.employees = null;
+        $scope.showEmployeeForm = false;
 
         getDepartments();
         getEmployees();
@@ -36,18 +37,32 @@ angular.module('edetek.controllers').controller('controllers.View',
             api.deleteEmployee(employeeId).then(function() {
                 getEmployees();
             })
-        }
+        };
 
         $scope.showAddDepartmentInputs = function() {
             $scope.addDepartmentInputs = !$scope.addDepartmentInputs;
+        };
+
+        $scope.showAddEmployeeForm = function() {
+            $scope.showEmployeeForm = !$scope.showEmployeeForm;
+        };
+
+        $scope.backBattonClicked = function() {
+            $scope.showEmployeeForm = false;
         }
-        
+
+        $scope.cancelAddEmployee = function() {
+            $scope.showEmployeeForm = false;
+            $scope.newEmployee = {};
+        }
+
         $scope.filterByDepartmentId = function(id) {
-            return function(employee) {
-                if (!employee) {
+            id = +id;
+            return function(item) {
+                if (!item) {
                     return;
                 }
-                if (employee.departmentId === id) {
+                if (item.departmentId === id || item.id === id) {
                     return true;
                 } else {
                     return false;
