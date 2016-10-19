@@ -84,6 +84,20 @@ angular.module("edetek.services").factory("services.Api",
                             defered.resolve(data);
                         });
                     return defered.promise;
+                },
+
+                getEmployeesAmount: function (departmentId) {
+                    var defered = $q.defer();
+                    $http({
+                        method: 'GET',
+                        url: "http://ebsexpress-env.us-west-2.elasticbeanstalk.com/users/employees/count/" + departmentId,
+                    })
+                        .success(function (data) {
+                            defered.resolve(data);
+                        });
+                    return defered.promise;
                 }
+
+
             }
         }]);

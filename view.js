@@ -24,11 +24,13 @@ angular.module('edetek.controllers').controller('controllers.View',
                 .then(function () {
                     getDepartments();
                 })
-        }
+        };
 
         $scope.addEmployee = function(firstName, lastName, phone, salary, departmentId, departmentName){
             api.addEmployee(firstName, lastName, phone, salary, departmentId, departmentName).then(function(response) {
                 $scope.employees.push(response);
+                $scope.showEmployeeForm = false;
+                $scope.newEmployee = {};
                 getEmployees();
             })
         };
@@ -49,31 +51,57 @@ angular.module('edetek.controllers').controller('controllers.View',
 
         $scope.backBattonClicked = function() {
             $scope.showEmployeeForm = false;
-        }
+        };
 
         $scope.cancelAddEmployee = function() {
             $scope.showEmployeeForm = false;
             $scope.newEmployee = {};
-        }
+        };
 
-        $scope.filterByDepartmentId = function(id) {
+        $scope.filterByDepartmentIdForEmployees = function(id) {
             id = +id;
             return function(item) {
                 if (!item) {
                     return;
                 }
-                if (item.departmentId === id || item.id === id) {
+                if (item.departmentId === id) {
                     return true;
                 } else {
                     return false;
                 }
             }
-        }
+        };
+
+        $scope.filterByDepartmentIdForDepartments = function(id) {
+            id = +id;
+            return function(item) {
+                if (!item) {
+                    return;
+                }
+                if (item.id === id) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        };
 
         function getDepartments() {
             api.getDepartments().then(function (response) {
                 $scope.departments = response;
+                $scope.departments.forEach(function (department) {
+                    department.hasEmployees = false;
+                    getEmployeesAmount(department.id).then(function (response) {
+                        department.hasEmployees = !response;
+                    })
+                })
             });
+        }
+
+        function getEmployeesAmount(departmentId) {
+            return api.getEmployeesAmount(departmentId).then(function(response){
+                return response.count
+            })
         }
         
         function getEmployees() {

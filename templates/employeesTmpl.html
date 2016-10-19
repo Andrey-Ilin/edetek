@@ -5,7 +5,7 @@
 </div>
 
 <ul>
-    <li ng-repeat="department in departments | filter:filterByDepartmentId(departmenId)" class="well">
+    <li ng-repeat="department in departments | filter:filterByDepartmentIdForDepartments(departmenId)" class="well">
         <strong>Department name:</strong> {{department.name}}
         <strong>Department description:</strong> {{department.description}}
 
@@ -21,7 +21,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr ng-repeat="employee in employees | filter:filterByDepartmentId(department.id)">
+                <tr ng-repeat="employee in employees | filter:filterByDepartmentIdForEmployees(department.id)">
                     <td>{{employee.firstName}}</td>
                     <td>{{employee.lastName}}</td>
                     <td>{{employee.phone}}</td>

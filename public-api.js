@@ -8,7 +8,7 @@ angular.module("edetek", [
     "edetek.filters",
     "ui.router"
 ])
-    .config(function ($stateProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('departments', {
                 url: '/departments',
@@ -18,16 +18,15 @@ angular.module("edetek", [
             .state('employees', {
                 url: '/employees/:id',
                 templateUrl: 'templates/employeesTmpl.html',
-                controller: function($scope, $stateParams) {
-                    console.log($stateParams.id);
+                controller: function($scope, $stateParams, $http) {
                     $scope.departmenId = $stateParams.id;
+                    $http({method: 'GET', url: 'http://ebsexpress-env.us-west-2.elasticbeanstalk.com/users/departments/'})
+                        .then (function (response) {
+                            $scope.departments = response.data;
+                        })
+                    }
 
-                    $scope.currentDepartment = $scope.departments.filter(function(item, id) {
-                        return item.id === id;
-                    })[0]
-
-                    console.log($scope.currentDepartment)
-                }
-            })
+            });
+        $urlRouterProvider.otherwise('/departments');
     });
 

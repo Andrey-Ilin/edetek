@@ -1,11 +1,11 @@
-
 <ul>
     <li ng-repeat="department in departments" class="well">
-        Department name: {{department.name}}
-        Department description: {{department.description}}
+        <strong>Department name:</strong> {{department.name}}
+        <strong>Department description:</strong> {{department.description}}
         <div class="pull-right">
-            <a href="#/employees/{{department.id}}" class="btn btn-primary" ng-click="selectDepartment(department.id)">Show employees</a>
-            <button class="btn btn-danger" ng-click="deleteDepartment(department.id)">Delete</button>
+            <button class="btn btn-danger" ng-click="deleteDepartment(department.id)"
+            ng-if="department.hasEmployees">Delete</button>
+            <a href="#/employees/{{department.id}}" class="btn btn-primary" ng-click="selectDepartment(department.id)">Showemployees</a>
         </div>
     </li>
 </ul>
@@ -13,11 +13,11 @@
 <div ng-if="addDepartmentInputs" class="well addepartment">
     <form class="form-inline" ng-submit="addDepartment(newDepartment.name, newDepartment.description)">
         <div class="form-group">
-            <label for="name">Department name:</label>
+            <label>Department name:</label>
             <input type="text" class="form-control" ng-model="newDepartment.name">
         </div>
         <div class="form-group">
-            <label for="description">Department description:</label>
+            <label>Department description:</label>
             <input type="text" class="form-control" ng-model="newDepartment.description">
         </div>
         <button type="submit" class="btn btn-success">Add department</button>
