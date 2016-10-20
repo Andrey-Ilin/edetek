@@ -1,0 +1,27 @@
+{
+  "name": "edetek",
+  "version": "1.0.0",
+  "description": "Test task",
+  "main": "index.html",
+  "moduleType": [],
+  "keywords": [],
+  "authors": [
+    "Andrey Ilyin"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "angular": "~1.5.8"
+  },
+  "devDependencies": {
+    "angular-ui-router": "0.3.1"
+  }
+}

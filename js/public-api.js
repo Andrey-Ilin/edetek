@@ -6,7 +6,7 @@ angular.module("edetek", [
     "edetek.services",
     "ui.router"
 ])
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state('departments', {
                 url: '/departments',
@@ -29,5 +29,5 @@ angular.module("edetek", [
 
             });
         $urlRouterProvider.otherwise('/departments');
-    });
+    }]);
 
