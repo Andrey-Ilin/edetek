@@ -4,8 +4,10 @@
         <strong>Department description:</strong> {{department.description}}
         <div class="pull-right">
             <button class="btn btn-danger" ng-click="deleteDepartment(department.id)"
-            ng-if="department.hasEmployees">Delete</button>
-            <a href="#/employees/{{department.id}}" class="btn btn-primary" ng-click="selectDepartment(department.id)">Showemployees</a>
+                    ng-if="department.hasEmployees">Delete
+            </button>
+            <a href="#/employees/{{department.id}}" class="btn btn-primary" ng-click="selectDepartment(department.id)">Show
+                employees</a>
         </div>
     </li>
 </ul>

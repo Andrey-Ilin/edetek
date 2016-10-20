@@ -30,7 +30,7 @@ angular.module("edetek.services").factory("services.Api",
                     return defered.promise;
                 },
 
-                deleteDepartment: function(departmentId) {
+                deleteDepartment: function (departmentId) {
                     var defered = $q.defer();
                     $http({
                         method: 'DELETE',
@@ -54,7 +54,7 @@ angular.module("edetek.services").factory("services.Api",
                     return defered.promise;
                 },
 
-                addEmployee: function(firstName, lastName, phone, salary, departmentId, departmentName) {
+                addEmployee: function (firstName, lastName, phone, salary, departmentId, departmentName) {
                     var defered = $q.defer();
                     $http({
                         method: 'POST',
@@ -73,8 +73,8 @@ angular.module("edetek.services").factory("services.Api",
                         });
                     return defered.promise;
                 },
-                
-                deleteEmployee: function(employeeId) {
+
+                deleteEmployee: function (employeeId) {
                     var defered = $q.defer();
                     $http({
                         method: 'DELETE',
@@ -97,7 +97,5 @@ angular.module("edetek.services").factory("services.Api",
                         });
                     return defered.promise;
                 }
-
-
             }
         }]);

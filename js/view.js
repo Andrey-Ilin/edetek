@@ -1,6 +1,6 @@
 angular.module('edetek.controllers').controller('controllers.View',
     ['$scope', 'services.Api', function ($scope, api) {
-        $scope.departments = null
+        $scope.departments = null;
         $scope.newDepartment = {};
         $scope.newEmployee = {};
         $scope.addDepartmentInputs = false;
@@ -26,8 +26,8 @@ angular.module('edetek.controllers').controller('controllers.View',
                 })
         };
 
-        $scope.addEmployee = function(firstName, lastName, phone, salary, departmentId, departmentName){
-            api.addEmployee(firstName, lastName, phone, salary, departmentId, departmentName).then(function(response) {
+        $scope.addEmployee = function (firstName, lastName, phone, salary, departmentId, departmentName) {
+            api.addEmployee(firstName, lastName, phone, salary, departmentId, departmentName).then(function (response) {
                 $scope.employees.push(response);
                 $scope.showEmployeeForm = false;
                 $scope.newEmployee = {};
@@ -35,32 +35,32 @@ angular.module('edetek.controllers').controller('controllers.View',
             })
         };
 
-        $scope.deleteEmployee = function(employeeId) {
-            api.deleteEmployee(employeeId).then(function() {
+        $scope.deleteEmployee = function (employeeId) {
+            api.deleteEmployee(employeeId).then(function () {
                 getEmployees();
             })
         };
 
-        $scope.showAddDepartmentInputs = function() {
+        $scope.showAddDepartmentInputs = function () {
             $scope.addDepartmentInputs = !$scope.addDepartmentInputs;
         };
 
-        $scope.showAddEmployeeForm = function() {
+        $scope.showAddEmployeeForm = function () {
             $scope.showEmployeeForm = !$scope.showEmployeeForm;
         };
 
-        $scope.backBattonClicked = function() {
+        $scope.backBattonClicked = function () {
             $scope.showEmployeeForm = false;
         };
 
-        $scope.cancelAddEmployee = function() {
+        $scope.cancelAddEmployee = function () {
             $scope.showEmployeeForm = false;
             $scope.newEmployee = {};
         };
 
-        $scope.filterByDepartmentIdForEmployees = function(id) {
+        $scope.filterByDepartmentIdForEmployees = function (id) {
             id = +id;
-            return function(item) {
+            return function (item) {
                 if (!item) {
                     return;
                 }
@@ -72,9 +72,9 @@ angular.module('edetek.controllers').controller('controllers.View',
             }
         };
 
-        $scope.filterByDepartmentIdForDepartments = function(id) {
+        $scope.filterByDepartmentIdForDepartments = function (id) {
             id = +id;
-            return function(item) {
+            return function (item) {
                 if (!item) {
                     return;
                 }
@@ -99,14 +99,14 @@ angular.module('edetek.controllers').controller('controllers.View',
         }
 
         function getEmployeesAmount(departmentId) {
-            return api.getEmployeesAmount(departmentId).then(function(response){
+            return api.getEmployeesAmount(departmentId).then(function (response) {
                 return response.count
             })
         }
-        
+
         function getEmployees() {
             api.getEmployees()
-                .then(function(response) {
+                .then(function (response) {
                     $scope.employees = response;
                 })
         }
